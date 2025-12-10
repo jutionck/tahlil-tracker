@@ -1,0 +1,28 @@
+{
+  "name": "tahlil-yasinan-tracker",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Jution Candra Kirana",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "lucide-react": "^0.556.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "jsdom": "^27.3.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0",
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.0.15"
+  }
+}
