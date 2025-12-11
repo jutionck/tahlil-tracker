@@ -1,6 +1,6 @@
 # Tahlil & Yasinan Tracker 🌙
 
-![Mobile Preview](./assets/mobile-preview.png)
+![Mobile Preview](./assets/app-preview.png)
 
 Aplikasi web progresif (PWA) untuk menghitung hari selamatan orang meninggal (tahlilan) dan panduan bacaan Yasin & Tahlil lengkap., serta tata cara pengurusan jenazah.
 
