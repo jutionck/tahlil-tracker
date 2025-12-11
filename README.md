@@ -1,6 +1,8 @@
 # Tahlil & Yasinan Tracker 🌙
 
-Aplikasi web modern untuk membantu menghitung hari selamatan almarhum (3 hari, 7 hari, 40 hari, 100 hari, dst), menyediakan panduan bacaan Yasin & Tahlil lengkap, serta tata cara pengurusan jenazah.
+![Mobile Preview](./mobile-preview.png)
+
+Aplikasi web progresif (PWA) untuk menghitung hari selamatan orang meninggal (tahlilan) dan panduan bacaan Yasin & Tahlil lengkap., serta tata cara pengurusan jenazah.
 
 Aplikasi ini dibangun dengan **React**, **TypeScript**, dan **Vite**, serta mendukung **PWA (Progressive Web App)** sehingga bisa diinstal di HP dan berjalan secara offline.
 
