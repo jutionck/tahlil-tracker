@@ -9,16 +9,19 @@ interface ReadingViewProps {
 }
 
 const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
-  const [activeTab, setActiveTab] = useState<'yasin' | 'tahlil'>('yasin');
+  const [activeTab, setActiveTab] = useState<'awalan' | 'yasin' | 'tahlil'>('awalan');
   const [fontSize, setFontSize] = useState<number>(26);
 
   const renderVerse = (verse: Verse, index: number) => {
+    let arabicText = verse.arabic;
     let latinText = verse.latin;
     let transText = verse.translation;
 
-    if (verse.isKhususon && profile.name) {
-      latinText = latinText?.replace('{NAMA}', profile.name);
-      transText = transText?.replace('{NAMA}', profile.name);
+    if (verse.isKhususon) {
+       const replacement = profile.name ? profile.name : '...';
+       arabicText = arabicText?.replace('{NAMA}', replacement);
+       latinText = latinText?.replace('{NAMA}', replacement);
+       transText = transText?.replace('{NAMA}', replacement);
     }
 
     const isHeaderBlock = verse.isHeader;
@@ -30,7 +33,6 @@ const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
             isHeaderBlock ? 'bg-emerald-50/80 rounded-xl p-5 mb-6 border border-emerald-100 shadow-sm' : 'px-2'
         }`}
       >
-        {/* Section Title & Repeat Badge */}
         {(verse.title || verse.repeat) && (
           <div className="flex flex-wrap items-center gap-2 mb-4">
              {verse.title && (
@@ -56,7 +58,7 @@ const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
             style={{ fontSize: `${fontSize}px` }}
             dir="rtl"
         >
-          {verse.arabic}
+          {arabicText}
           {activeTab === 'yasin' && !verse.isHeader && typeof verse.id === 'number' && (
               <span className="inline-flex items-center justify-center w-8 h-8 text-sm bg-emerald-50 text-emerald-600 rounded-full border border-emerald-200 mr-3 align-middle font-sans shadow-sm select-none">
                   {verse.id}
@@ -88,7 +90,18 @@ const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-24">
       <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-gray-100 px-4 py-3 shadow-sm transition-all">
         
-        <div className="flex bg-gray-100 p-1.5 rounded-xl mb-4">
+        <div className="flex flex-col sm:flex-row bg-gray-100 p-1.5 rounded-xl mb-4 gap-2 sm:gap-0">
+            <button
+                onClick={() => setActiveTab('awalan')}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-bold rounded-lg transition-all ${
+                    activeTab === 'awalan' 
+                    ? 'bg-white text-emerald-700 shadow-sm ring-1 ring-black/5' 
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200/50'
+                }`}
+            >
+                <BookOpen size={18} />
+                Awalan
+            </button>
             <button
                 onClick={() => setActiveTab('yasin')}
                 className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-bold rounded-lg transition-all ${
@@ -113,12 +126,12 @@ const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
             </button>
         </div>
 
-        <div className="flex items-center gap-4 text-gray-500 bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-            <div className="flex items-center gap-2 min-w-fit">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-gray-500 bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
                 <Settings size={16} className="text-emerald-600" />
                 <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Ukuran Teks</span>
             </div>
-            <div className="flex items-center gap-3 flex-1">
+            <div className="flex items-center gap-3 w-full sm:flex-1">
                 <span className="text-xs font-bold text-gray-400">Aa</span>
                 <input 
                     type="range" 
@@ -135,14 +148,34 @@ const ReadingView: React.FC<ReadingViewProps> = ({ profile }) => {
       </div>
 
       <div className="p-5 min-h-[500px]">
-        {activeTab === 'yasin' ? (
+
+
+        {activeTab === 'awalan' ? (
+             <div className="animate-in fade-in duration-300">
+                <div className="text-center mb-8 bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
+                    <h2 className="text-2xl font-bold text-emerald-800 mb-2">Awalan & Tawasul</h2>
+                    <p className="text-gray-700 font-semibold">Pembuka Sebelum Yasin</p>
+                </div>
+                {yasinVerses.filter(v => typeof v.id === 'string' && (v.id.startsWith('tawasul') || v.id.startsWith('fatihah'))).map(renderVerse)}
+                
+                <div className="mt-8 text-center p-6 bg-gray-50 rounded-xl border border-gray-100">
+                    <p className="text-gray-500 text-sm">Selesai membaca Awalan.</p>
+                    <button 
+                        onClick={() => setActiveTab('yasin')}
+                        className="mt-3 text-emerald-600 font-bold text-sm hover:underline"
+                    >
+                        Lanjut ke Surat Yasin &rarr;
+                    </button>
+                </div>
+            </div>
+        ) : activeTab === 'yasin' ? (
             <div className="animate-in fade-in duration-300">
                 <div className="text-center mb-8 bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
                     <h2 className="text-3xl font-bold font-arabic text-emerald-800 mb-2">يس</h2>
                     <p className="text-gray-700 font-semibold">Surat Yasin</p>
                     <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest">Makkiyah • 83 Ayat</p>
                 </div>
-                {yasinVerses.map(renderVerse)}
+                {yasinVerses.filter(v => typeof v.id === 'number').map(renderVerse)}
                 
                 <div className="mt-8 text-center p-6 bg-gray-50 rounded-xl border border-gray-100">
                     <p className="text-gray-500 text-sm">Selesai membaca Surat Yasin.</p>

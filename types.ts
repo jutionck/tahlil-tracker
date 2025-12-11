@@ -10,7 +10,7 @@ export enum CalculationMethod {
 
 export interface DeceasedProfile {
   name: string;
-  deathDate: string; // ISO date string YYYY-MM-DD
+  deathDate: string;
   gender: Gender;
 }
 
@@ -24,6 +24,6 @@ export interface Milestone {
 }
 
 export interface JavaneseDate {
-  dayName: string; // Senin, Selasa...
-  pasaran: string; // Pon, Wage...
+  dayName: string;
+  pasaran: string;
 }

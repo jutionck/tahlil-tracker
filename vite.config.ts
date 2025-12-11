@@ -1,11 +1,9 @@
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const env = loadEnv(mode, '.', '');
   return {
     server: {
       port: 3000,

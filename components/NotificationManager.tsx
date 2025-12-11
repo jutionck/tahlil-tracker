@@ -19,7 +19,6 @@ const NotificationManager: React.FC<NotificationManagerProps> = ({ profile }) =>
     if (permission === 'granted' && profile.name && profile.deathDate) {
       checkAndNotify();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [permission, profile]);
 
   const checkAndNotify = () => {

@@ -9,7 +9,6 @@ const InstallPrompt: React.FC = () => {
     const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      // Check if user has already dismissed it recently (optional, skipping for simplicity)
       setShowPrompt(true);
     };
 

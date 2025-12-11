@@ -24,7 +24,6 @@ const App: React.FC = () => {
     if (profile.name && profile.deathDate) {
       handleCalculate();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCalculate = () => {
@@ -35,10 +34,6 @@ const App: React.FC = () => {
       setActiveTab('calculator'); 
     }
   };
-
-
-
-
 
   const today = new Date();
   today.setHours(0,0,0,0);
