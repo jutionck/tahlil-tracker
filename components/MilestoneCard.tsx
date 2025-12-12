@@ -7,13 +7,14 @@ interface MilestoneCardProps {
   milestone: Milestone;
   isToday: boolean;
   deceasedName: string;
+  gender: string;
 }
 
-const MilestoneCard: React.FC<MilestoneCardProps> = ({ milestone, isToday, deceasedName }) => {
+const MilestoneCard: React.FC<MilestoneCardProps> = ({ milestone, isToday, deceasedName, gender }) => {
   const pasaran = getJavanesePasaran(milestone.date);
   
   const handleAddToCalendar = () => {
-    const url = generateGoogleCalendarUrl(milestone, deceasedName);
+    const url = generateGoogleCalendarUrl(milestone, deceasedName, gender);
     window.open(url, '_blank');
   };
   

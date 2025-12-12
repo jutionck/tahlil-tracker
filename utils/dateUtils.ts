@@ -66,7 +66,7 @@ export const calculateMilestones = (
   return milestones;
 };
 
-export const generateGoogleCalendarUrl = (milestone: Milestone, deceasedName: string): string => {
+export const generateGoogleCalendarUrl = (milestone: Milestone, deceasedName: string, gender: string = 'Laki-laki'): string => {
   const date = milestone.date;
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -80,9 +80,11 @@ export const generateGoogleCalendarUrl = (milestone: Milestone, deceasedName: st
   const nDd = String(nextDay.getDate()).padStart(2, '0');
   const nextDateStr = `${nYyyy}${nMm}${nDd}`;
 
-  const title = encodeURIComponent(`Tahlilan ${milestone.title} - ${deceasedName}`);
+  const titlePrefix = gender === 'Perempuan' ? 'Almarhumah' : 'Almarhum';
+  const title = encodeURIComponent(`Tahlilan ${milestone.title} - ${titlePrefix} ${deceasedName}`);
+
   const details = encodeURIComponent(
-    `Peringatan ${milestone.title} (${milestone.javaneseName}) untuk Almarhum/ah ${deceasedName}.\n\n` +
+    `Peringatan ${milestone.title} (${milestone.javaneseName}) untuk ${titlePrefix} ${deceasedName}.\n\n` +
     `${milestone.description}\n` +
     `Hari/Pasaran: ${formatDateIndonesian(date)} (${getJavanesePasaran(date)})`
   );

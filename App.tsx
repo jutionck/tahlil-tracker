@@ -8,15 +8,16 @@ import MilestoneCard from './components/MilestoneCard';
 import ReadingView from './components/ReadingView';
 import GuideView from './components/GuideView';
 import { useDeceasedProfile } from './hooks/useDeceasedProfile';
+import JavaneseCalendarView from './components/JavaneseCalendarView';
 import InstallPrompt from './components/InstallPrompt';
-import { Calculator, BookOpen, BookHeart } from 'lucide-react';
+import { Calculator, BookOpen, BookHeart, Calendar } from 'lucide-react';
 
 const App: React.FC = () => {
   const { profile, setProfile } = useDeceasedProfile();
 
   const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [hasCalculated, setHasCalculated] = useState(false);
-  const [activeTab, setActiveTab] = useState<'calculator' | 'readings' | 'guides'>('calculator');
+  const [activeTab, setActiveTab] = useState<'calculator' | 'readings' | 'guides' | 'calendar'>('calculator');
   
 
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
                             milestone={milestone}
                             isToday={isToday}
                             deceasedName={profile.name}
+                            gender={profile.gender}
                         />
                     );
                   })}
@@ -78,7 +80,10 @@ const App: React.FC = () => {
                 
                 <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
                     <p className="font-bold mb-1">Catatan Perhitungan:</p>
-                    <p>Perhitungan menggunakan metode tradisional di mana hari wafat dihitung sebagai hari pertama (Geblag). Tanggal Pasaran Jawa dihitung secara matematis.</p>
+                    <p className="mb-2">Perhitungan menggunakan metode tradisional di mana hari wafat dihitung sebagai hari pertama (Geblag). Tanggal Pasaran Jawa dihitung secara matematis.</p>
+                    <p className="italic text-xs text-yellow-700 bg-yellow-100/50 p-2 rounded">
+                        Catatan: Perhitungan hari Jawa dimulai saat matahari terbenam (Maghrib). Jika wafat setelah Maghrib, dianggap sudah masuk hari berikutnya (hitungan Jawa).
+                    </p>
                 </div>
               </div>
             ) : (
@@ -101,6 +106,12 @@ const App: React.FC = () => {
            </div>
         )}
 
+        {activeTab === 'calendar' && (
+            <div className="animate-fade-in-up">
+                <JavaneseCalendarView />
+            </div>
+        )}
+
       </main>
 
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 pb-safe">
@@ -112,16 +123,25 @@ const App: React.FC = () => {
                 }`}
             >
                 <Calculator size={24} />
-                <span className="text-xs">Hitung Hari</span>
+                <span className="text-xs">Hitung</span>
             </button>
             <button 
-                 onClick={() => setActiveTab('readings')}
-                 className={`flex-1 py-4 flex flex-col items-center gap-1 transition-colors ${
+                onClick={() => setActiveTab('readings')}
+                className={`flex-1 py-4 flex flex-col items-center gap-1 transition-colors ${
                     activeTab === 'readings' ? 'text-emerald-600 font-bold' : 'text-gray-400 hover:text-gray-600'
                 }`}
             >
                 <BookOpen size={24} />
-                <span className="text-xs">Bacaan Yasin</span>
+                <span className="text-xs">Yasin</span>
+            </button>
+             <button 
+                onClick={() => setActiveTab('calendar')}
+                className={`flex-1 py-4 flex flex-col items-center gap-1 transition-colors ${
+                    activeTab === 'calendar' ? 'text-emerald-600 font-bold' : 'text-gray-400 hover:text-gray-600'
+                }`}
+            >
+                <Calendar size={24} />
+                <span className="text-xs">Kalender</span>
             </button>
             <button 
                  onClick={() => setActiveTab('guides')}
