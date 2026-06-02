@@ -73,9 +73,21 @@ Pastikan sudah terinstall Node.js di komputer Anda.
     *   **Android (Chrome)**: Klik menu titik tiga -> "Install app" atau "Add to Home Screen".
     *   **iOS (Safari)**: Klik tombol Share -> "Add to Home Screen".
 
+## 🤝 Kontribusi
+
+Kontribusi sangat terbuka untuk perbaikan bug, dokumentasi, aksesibilitas, UI/UX, validasi konten, dan peningkatan PWA. Lihat [CONTRIBUTING.md](CONTRIBUTING.md) untuk panduan kontribusi.
+
+## 🗺️ Roadmap
+
+Rencana pengembangan project tersedia di [ROADMAP.md](ROADMAP.md).
+
+## 🔐 Keamanan
+
+Jika menemukan masalah keamanan, lihat [SECURITY.md](SECURITY.md) untuk panduan pelaporan.
+
 ## 📝 Lisensi
 
-Milik **Jution Candra Kirana**. Dibuat untuk tujuan kemaslahatan umat. Silakan dikembangkan lebih lanjut.
+Project ini dirilis sebagai open-source di bawah lisensi [MIT](LICENSE).
 
 ---
 *Dibuat dengan ❤️ di Indonesia.*
